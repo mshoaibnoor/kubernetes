@@ -4,7 +4,7 @@ Objective:
 This example creates a simple kubernetes deployment that can be accessible through service with loadbalancer option.
 
 Details:
-A sample one microservice nodejs application is deployed on kubernetes cluster using yaml files. 
+A single microservice nodejs application is deployed on kubernetes cluster using yaml files. 
 
 Content:
 1- A docker file to build a container.

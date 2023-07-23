@@ -1,0 +1,70 @@
+
+# create yaml file for pod 
+kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml
+
+# manual scheduling
+kubectl explain pod.spec.nodeName
+
+
+
+# labels and selectors
+
+metadata:
+  labels:
+    env: dev
+    bu: finance
+    tier: middle
+
+kubectl get pods --selector env=dev --no-headers | wc -l
+
+kubectl get pods --selector bu=finance,env=prod,tier=frontend
+
+
+# Taints and Tolerations
+kubectl describe node node01 | grep Taints
+
+# add taint to a node
+kubectl taint node node01 spray=mortein:NoSchedule
+
+#Create a new pod with the nginx image and pod name as mosquito
+
+# Create another pod named bee with the nginx image, which has a toleration set to the taint mortein
+kubectl explain pod.spec.tolertions
+
+  tolerations:
+  -  key: "spray"
+     operator: "Equal"
+     value: "mortein"
+     effect: "NoSchedule"
+
+
+# Remove the taint on controlplane, which currently has the taint effect of NoSchedule
+kubectl taint node controlplane node-role.kubernetes.io/control-plane:NoSchedule-
+
+
+# Node Selector
+# label a node
+kubectl label node node01 size=large
+
+
+# Node Affinity
+#Set Node Affinity to the deployment to place the pods on node01 only.
+# Name: blue
+# Replicas: 3
+# Image: nginx
+# NodeAffinity: requiredDuringSchedulingIgnoredDuringExecution
+# Key: color
+# value: blue
+
+# Resource limit
+
+
+# DaemonSets
+kubectl get daemonsets
+
+# cant generate daemonset yaml from kubectl, so generate deployment yaml from kubectl and then modify it for daemonset
+
+
+# Static Pod, when master node is not available
+
+

@@ -1,0 +1,81 @@
+
+# if kubectl is not available we wont be able to troubleshoot kube api server or etcd, we have to use docker or crictl
+
+docker ps -a | grep etcd
+
+docker logs container_id
+
+
+crictl ps -a | grep etcd
+
+crictl logs container_id
+
+
+
+# certificate api
+kubectl get csr
+
+kubectl delete csr
+
+kubectl certificate approve csr_name
+
+kubectl get csr
+
+kubectl certificate deny csr_name
+
+cat akshay.csr | base64 -w 0
+
+
+
+# kubeconfig
+kubectl config view
+
+kubectl config use-context kubernetes-admin@kubernetes
+
+kubectl config -h
+
+kubectl config --kubeconfig=   current-context research
+
+
+
+#API groups
+kubectl proxy
+
+curl http://localhost:8001/version
+
+
+
+
+#Authorization
+
+RBAC
+kubectl auth can-i create deployment
+
+kubectl auth can-i create node
+
+kubectl auth can-i create deployment --as dev-user
+
+
+# Cluster Roles and Role Bindings
+kubectl create clusterrole -h
+
+kubectl create clusterrole storage-admin --resource=pv,sc --verb=*
+
+
+kubectl create clusterrolebinding -h
+
+kubectl create clusterrolebinding michelle-storage-admin --clusterrole=storage-admin --user=michelle
+
+
+kubectl api-resources
+
+
+# Service Account
+
+kubectl set serviceaccount deploy/web-dashboard dashboard-sa # to update the service account in a deployment
+
+
+# Image Security
+
+
+kubectl create secret docker-registery name-of-secret

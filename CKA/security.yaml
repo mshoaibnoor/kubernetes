@@ -78,4 +78,23 @@ kubectl set serviceaccount deploy/web-dashboard dashboard-sa # to update the ser
 # Image Security
 
 
-kubectl create secret docker-registery name-of-secret
+kubectl create secret docker-registery name-of-secret 
+--docker-username=user 
+--docker-password=password 
+--docker-email=email 
+--docker-server=server
+
+
+# Container Security context
+
+kubectl exec container-name -- whoami
+
+spec:
+  containers:
+  - name: sec-ctx-4
+    image: gcr.io/google-samples/node-hello:1.0
+    securityContext:
+      runAsUser: 
+      capabilities:
+        add: ["NET_ADMIN", "SYS_TIME"]
+

@@ -1,10 +1,24 @@
+# https://devopscube.com/cka-exam-study-guide/
+
 
 # create yaml file for pod 
 kubectl run nginx --image=nginx --dry-run=client -o yaml > pod.yaml
 
-# manual scheduling
-kubectl explain pod.spec.nodeName
+# get pod syntax to update pod yaml file
+kubectl explain pod
 
+kubectl explain pod.spec
+
+#create yaml file for deployment
+kubectl create deployment nginx --image=nginx --dry-run=client -o yaml > deployment.yml
+
+
+# get deployment syntax from below command to update deployment yaml file
+kubectl explain deploy
+
+kubectl explain deploy.spec
+
+kubectl explain deploy.spec.template
 
 
 # labels and selectors
